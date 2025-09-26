@@ -18,20 +18,7 @@ public:
     virtual ~Tool() {}  
 
     virtual void input() {
-        int choice;
-        priceDB.showToolMenu();
-        cout << "Enter Tool Number You Want To Buy: ";
-        cin >> choice;
-
-        name = priceDB.getToolName(choice);
-        price = priceDB.getToolPrice(choice);
-
-        if (price == 0) {
-            cout << "Invalid choice! Enter tool name manually: ";
-            cin >> name;
-            cout << "Enter price: ";
-            cin >> price;
-        }
+        cout << "Base Tool does not have specific input. Use PowerTool or HandTool." << endl;
     }
 
     virtual void display() const {
@@ -47,6 +34,23 @@ public:
     PowerTool() {}
     PowerTool(string nam, int pric, int quant) : Tool(nam, pric, quant) {}
 
+    void input() override {
+        int choice;
+        priceDB.showPowerToolMenu();
+        cout << "Enter Power Tool Number You Want To Buy: ";
+        cin >> choice;
+
+        name = priceDB.getPowerToolName(choice);
+        price = priceDB.getPowerToolPrice(choice);
+
+        if (price == 0) {
+            cout << "Invalid choice! Enter tool name manually: ";
+            cin >> name;
+            cout << "Enter price: ";
+            cin >> price;
+        }
+    }
+
     void display() const override {
         cout << "[Power Tool]" << endl;
         Tool::display();
@@ -57,6 +61,23 @@ class HandTool : public Tool {
 public:
     HandTool() {}
     HandTool(string nam, int pric, int quant) : Tool(nam, pric, quant) {}
+
+    void input() override {
+        int choice;
+        priceDB.showHandToolMenu();
+        cout << "Enter Hand Tool Number You Want To Buy: ";
+        cin >> choice;
+
+        name = priceDB.getHandToolName(choice);
+        price = priceDB.getHandToolPrice(choice);
+
+        if (price == 0) {
+            cout << "Invalid choice! Enter tool name manually: ";
+            cin >> name;
+            cout << "Enter price: ";
+            cin >> price;
+        }
+    }
 
     void display() const override {
         cout << "[Hand Tool]" << endl;
